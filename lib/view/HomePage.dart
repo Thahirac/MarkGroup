@@ -87,7 +87,7 @@ class _homeState extends State<home> {
               ),
               GestureDetector(
                 onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>hollyday()));
+                 /* Navigator.push(context, MaterialPageRoute(builder: (context)=>hollyday()));*/
                 },
                 child: ListTile(
                   leading: Icon(Icons.calendar_today,size: 20,color: Colors.yellow.shade700,),
@@ -161,7 +161,7 @@ class _homeState extends State<home> {
 
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>hollyday()));
+         // Navigator.push(context, MaterialPageRoute(builder: (context)=>hollyday()));
         },
         child: const Icon(Icons.add_outlined,size: 30,),
         backgroundColor: Colors.indigo.shade300,

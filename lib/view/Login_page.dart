@@ -1,25 +1,97 @@
 import 'package:flutter/material.dart';
+import 'package:markgroup/models/Loginmodel.dart';
 import 'package:markgroup/view/HomePage.dart';
+import 'package:http/http.dart'as http;
+import 'dart:convert';
+
+import 'package:shared_preferences/shared_preferences.dart';
 
 class loginpage extends StatefulWidget {
+
+  /*const home({Key key}) : super(key: key);*/
   @override
   _loginpageState createState() => _loginpageState();
-
-  final Key = GlobalKey<FormState>();
-
-  /*final Key = GlobalKey<FormState>();
-
-  TextEditingController mobilecontroller=new TextEditingController();
-  TextEditingController passcontroller=new TextEditingController();*/
 
 }
 
 class _loginpageState extends State<loginpage> {
+
+  final Key = GlobalKey<FormState>();
+
+  TextEditingController mobilecontroller=new TextEditingController();
+  TextEditingController passcontroller=new TextEditingController();
+
+
+
+
+  void login(BuildContext context) async{
+
+    var client = http.Client();
+
+    String mobile=mobilecontroller.text;
+    String pass=passcontroller.text;
+
+    var jsonresponse= await client.post("http://markbuilders.in/admin/public/api/login?phone=9037735350&password=123456789",
+
+        headers: {
+
+          "Accept": "application/json",
+        },
+
+        body: {
+          "mobile":mobile,
+          "password":pass,
+        }
+
+    );
+
+    if(jsonresponse.statusCode==200)
+    {
+      var response = await LoginClass.fromJson(jsonDecode(jsonresponse.body,));
+
+      if(response.status=="1")
+      {
+
+
+        print('login success');
+
+      // String name=response.data.name; ///passing name into home page
+
+        //SharedPreferences prefs = await  SharedPreferences.getInstance();
+        //prefs.setString('name',name);
+
+      // print(prefs.getString('name'));
+
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>home()));
+
+       //List<UserProfile> list=response.data.userProfile;
+
+
+
+
+      }
+      else{
+
+        print('login failed');
+
+
+
+
+      }
+    }
+
+    else
+    {
+      return null;
+    }
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Form(
-        /*key: Key,*/
+        key: Key,
         child: ListView(
           children: [
             Padding(
@@ -41,14 +113,14 @@ class _loginpageState extends State<loginpage> {
                 child:
 
                     TextFormField(
-                      /*controller: mobilecontroller,*/
-                     /* validator: (value) {
-                        if (value.isEmpty) {
+                      controller: mobilecontroller,
+                     validator: (value) {
+                        if (value!.isEmpty) {
                           return "Enter Mobile Number";
                         } else {
                           return null;
                         }
-                      },*/
+                      },
                       keyboardType: TextInputType.phone,
                       decoration: InputDecoration(
                         fillColor: Colors.white,
@@ -73,14 +145,14 @@ class _loginpageState extends State<loginpage> {
 
                     TextFormField(
                       obscureText: true,
-                    /*  controller: passcontroller,
+                      controller: passcontroller,
                       validator: (value) {
-                        if (value.isEmpty) {
+                        if (value!.isEmpty) {
                           return "Enter Password";
                         } else {
                           return null;
                         }
-                      },*/
+                      },
                       decoration: InputDecoration(
                         fillColor: Colors.white,
                         labelText: "Password",
@@ -94,35 +166,41 @@ class _loginpageState extends State<loginpage> {
 
 
             SizedBox(
-              height: 25,
+              height: 34,
             ),
 
 
             Padding(
               padding: const EdgeInsets.only(left: 20, right: 20),
-              child: RaisedButton(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
-                  textColor: Colors.white,
-                  color: Colors.indigo[400],
-                  child: Center(
-                      child: Text(
-                        "Signin",
-                        style: TextStyle(fontSize: 15),
-                      )),
-                  onPressed: () {
+              child: Container(
+                height: 40,
+                child: RaisedButton(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(14)),
+                    textColor: Colors.white,
+                    color: Colors.indigo.shade500,
+                    child: Center(
+                        child: Text(
+                          "Login",
+                          style: TextStyle(fontSize: 15),
+                        )),
+                    onPressed: () {
 
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>home()));
+
+                      if (Key.currentState!.validate()) {
+
+                        login(context);
+
+                      }
 
 
-                  /*  if (Key.currentState.validate()) {
+                     /* Navigator.push(context, MaterialPageRoute(builder: (context)=>home()));*/
 
-                      login(context);
 
-                    }*/
 
-                  }
-                  ),
+                    }
+                    ),
+              ),
             ),
 
 
