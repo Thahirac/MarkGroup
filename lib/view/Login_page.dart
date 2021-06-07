@@ -3,6 +3,7 @@ import 'package:markgroup/models/Loginmodel.dart';
 import 'package:markgroup/view/HomePage.dart';
 import 'package:http/http.dart'as http;
 import 'dart:convert';
+import 'package:get/route_manager.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -20,6 +21,9 @@ class _loginpageState extends State<loginpage> {
 
   TextEditingController mobilecontroller=new TextEditingController();
   TextEditingController passcontroller=new TextEditingController();
+
+  get index => null;
+
 
 
 
@@ -47,24 +51,26 @@ class _loginpageState extends State<loginpage> {
 
     if(jsonresponse.statusCode==200)
     {
-      var response = await LoginClass.fromJson(jsonDecode(jsonresponse.body,));
+      var response = await Login.fromJson(jsonDecode(jsonresponse.body,));
 
       if(response.status=="1")
       {
 
-
         print('login success');
 
-      // String name=response.data.name; ///passing name into home page
+        String token=response.data.token; ///passing name into home page
 
-        //SharedPreferences prefs = await  SharedPreferences.getInstance();
-        //prefs.setString('name',name);
+
+        SharedPreferences prefs = await  SharedPreferences.getInstance();
+
+        prefs.setString('token',token);
 
       // print(prefs.getString('name'));
 
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>home()));
 
-       //List<UserProfile> list=response.data.userProfile;
+
+       Get.to(home());
+
 
 
 
@@ -115,7 +121,7 @@ class _loginpageState extends State<loginpage> {
                     TextFormField(
                       controller: mobilecontroller,
                      validator: (value) {
-                        if (value!.isEmpty) {
+                        if (value.isEmpty) {
                           return "Enter Mobile Number";
                         } else {
                           return null;
@@ -147,7 +153,7 @@ class _loginpageState extends State<loginpage> {
                       obscureText: true,
                       controller: passcontroller,
                       validator: (value) {
-                        if (value!.isEmpty) {
+                        if (value.isEmpty) {
                           return "Enter Password";
                         } else {
                           return null;
@@ -187,7 +193,7 @@ class _loginpageState extends State<loginpage> {
                     onPressed: () {
 
 
-                      if (Key.currentState!.validate()) {
+                      if (Key.currentState.validate()) {
 
                         login(context);
 

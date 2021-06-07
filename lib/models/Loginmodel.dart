@@ -1,31 +1,29 @@
 // To parse this JSON data, do
 //
-//     final loginClass = loginClassFromJson(jsonString);
+//     final login = loginFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
-LoginClass loginClassFromJson(String str) => LoginClass.fromJson(json.decode(str));
+Login loginFromJson(String str) => Login.fromJson(json.decode(str));
 
-String loginClassToJson(LoginClass data) => json.encode(data.toJson());
+String loginToJson(Login data) => json.encode(data.toJson());
 
-class LoginClass {
-  LoginClass({
-    required this.status,
-    required this.message,
-    required this.data,
+class Login {
+  Login({
+    this.status,
+    this.message,
+    this.data,
   });
 
   String status;
   String message;
   Data data;
 
-  factory LoginClass.fromJson(Map<String, dynamic> json) => LoginClass(
+  factory Login.fromJson(Map<String, dynamic> json) => Login(
     status: json["status"],
     message: json["message"],
     data: Data.fromJson(json["data"]),
   );
-
 
   Map<String, dynamic> toJson() => {
     "status": status,
@@ -36,9 +34,9 @@ class LoginClass {
 
 class Data {
   Data({
-    required this.userType,
-    required this.token,
-    required this.userProfile,
+    this.userType,
+    this.token,
+    this.userProfile,
   });
 
   String userType;
@@ -60,23 +58,23 @@ class Data {
 
 class UserProfile {
   UserProfile({
-    required this.empId,
-    required this.empFirstname,
-    required this.empLastname,
-    required this.empUsername,
-    required this.empPassword,
-    required this.empPhone,
-    required this.empEmail,
-    required this.empImage,
-    required this.empJoindate,
-    required this.empDepartment,
-    required this.empDesignation,
-    required this.empSalary,
-    required this.createdAt,
-    required this.updatedAt,
-    required this.id,
-    required this.desName,
-    required this.depId,
+    this.empId,
+    this.empFirstname,
+    this.empLastname,
+    this.empUsername,
+    this.empPassword,
+    this.empPhone,
+    this.empEmail,
+    this.empImage,
+    this.empJoindate,
+    this.empDepartment,
+    this.empDesignation,
+    this.empSalary,
+    this.createdAt,
+    this.updatedAt,
+    this.id,
+    this.desName,
+    this.depId,
   });
 
   String empId;

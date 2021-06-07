@@ -10,9 +10,9 @@ String holidaymodelToJson(Holidaymodel data) => json.encode(data.toJson());
 
 class Holidaymodel {
   Holidaymodel({
-    required this.status,
-    required this.message,
-    required this.data,
+    this.status,
+    this.message,
+    this.data,
   });
 
   String status;
@@ -34,9 +34,9 @@ class Holidaymodel {
 
 class Datum {
   Datum({
-    required this.id,
-    required this.title,
-    required this.date,
+    this.id,
+    this.title,
+    this.date,
   });
 
   int id;
