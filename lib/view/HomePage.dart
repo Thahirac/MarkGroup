@@ -122,7 +122,7 @@ class _homeState extends State<home> {
                   size: 25,
                   color: Colors.white,
                 ),
-              )
+              ),
             ],
             backgroundColor: Colors.indigo[300],
           ),
@@ -137,7 +137,7 @@ class _homeState extends State<home> {
                         child: ClipOval(
                           child: Image.asset("images/pic.jpg", fit: BoxFit.fill),
                         ),
-                        backgroundColor: Colors.transparent,
+                        backgroundColor: Colors.white,
                         radius: 70,
                       ),
                       subtitle: Center(
@@ -265,7 +265,7 @@ class _homeState extends State<home> {
                           child: ClipOval(
                             child: Image.asset("images/pic.jpg", fit: BoxFit.fill),
                           ),
-                          backgroundColor: Colors.transparent,
+                          backgroundColor: Colors.white,
                           radius: 70,
                         ),
                         SizedBox(

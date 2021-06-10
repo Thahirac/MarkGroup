@@ -22,7 +22,7 @@ class _loginpageState extends State<loginpage> {
   TextEditingController mobilecontroller=new TextEditingController();
   TextEditingController passcontroller=new TextEditingController();
 
-  get index => null;
+
 
 
 
